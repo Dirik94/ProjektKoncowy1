@@ -34,7 +34,7 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
             message.setTo(to);
-            message.setFrom("noreply@springit.com");
+            message.setFrom("noreply@gmail.com");
             message.setSubject(subject);
             message.setText(content,isHtml);
             javaMailSender.send(mimeMessage);
@@ -56,12 +56,12 @@ public class MailService {
     @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/activation", "Springit User Activation");
+        sendEmailFromTemplate(user, "email/activation", "NotesApp User Activation");
     }
 
     @Async
     public void sendWelcomeEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/welcome", "Welcome new Springit User");
+        sendEmailFromTemplate(user, "email/welcome", "Welcome new NotesApp User");
     }
 }

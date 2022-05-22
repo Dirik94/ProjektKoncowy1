@@ -78,7 +78,7 @@ public class LinkController {
         }
     }
 
-    @Secured({"ROLE_USER"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/link/comments")
     public String addComment(@Valid Comment comment, BindingResult bindingResult){
         if( bindingResult.hasErrors() ){

@@ -23,9 +23,6 @@ public class ProjektKoncowy1Application {
     PrettyTime prettyTime(){
         return new PrettyTime();
     }
-
-    // TODO * Configuring this bean should not be needed once Spring Boot's Thymeleaf starter includes configuration
-    // TODO   for thymeleaf-extras-springsecurity5 (instead of thymeleaf-extras-springsecurity4)
     @Bean
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();

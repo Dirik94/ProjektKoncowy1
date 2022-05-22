@@ -43,7 +43,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        if( bindingResult.hasErrors() ) {
+        if(user.getPassword().length() <= 5){
+            logger.info("Validation errors were found while registering a new user");
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            return "auth/register";
+        }
+        else if( bindingResult.hasErrors() ) {
             // show validation errors
             logger.info("Validation errors were found while registering a new user");
             model.addAttribute("user",user);

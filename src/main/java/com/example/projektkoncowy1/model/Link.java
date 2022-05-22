@@ -8,8 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,10 +37,6 @@ public class Link extends Auditable {
     @OneToMany(mappedBy = "link")
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "link")
-    private List<Vote> votes = new ArrayList<>();
-
-    private int voteCount = 0;
 
     @ManyToOne
     private User user;
@@ -54,11 +52,9 @@ public class Link extends Auditable {
     }
 
     public String getPrettyTime() {
-        PrettyTime pt = BeanUtil.getBean(PrettyTime.class);
-        return pt.format(convertToDateViaInstant(getCreationDate()));
-    }
-
-    private Date convertToDateViaInstant(LocalDateTime dateToConvert) {
-        return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        Date date = java.util.Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+        return formatter.format(date);
     }
 }
